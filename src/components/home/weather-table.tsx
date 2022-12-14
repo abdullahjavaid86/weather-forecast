@@ -3,7 +3,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import dayjs from "dayjs";
 import { uniqueId } from "lodash";
 import { Table } from "reactstrap";
-import { WEATHER_TABLE_COLUMNS_SORTABLE } from "../../constants/constants";
+import {
+  WEATHER_ICON_URL,
+  WEATHER_TABLE_COLUMNS_SORTABLE,
+} from "../../constants/constants";
 import IFiveDaysThreeHoursWeatherForecast from "../../interfaces/weather";
 
 export const WeatherTable = ({
@@ -43,6 +46,11 @@ export const WeatherTable = ({
           <td>{temp} &#8451;</td>
           <td>{speed} Km/h</td>
           <td>
+            <img
+              src={`${WEATHER_ICON_URL}/${weather?.[0]?.icon}.png`}
+              alt="icon"
+              width={40}
+            />{" "}
             {weather.length
               ? `${weather?.[0]?.main} - ${weather?.[0]?.description}`
               : "N/A"}

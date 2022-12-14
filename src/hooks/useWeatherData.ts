@@ -11,6 +11,11 @@ export type WeatherHookProps = {
   initialLatLng: { lat: number; lon: number };
 };
 
+const initialSortState = {
+  [WEATHER_TABLE_COLUMNS_SORTABLE.TEMPERATURE]: 0,
+  [WEATHER_TABLE_COLUMNS_SORTABLE.WIND_SPEED]: 0,
+};
+
 export const useWeatherData = () => {
   const [latLng, setLatLng] = useState<WeatherHookProps["initialLatLng"][]>([
     {
@@ -19,10 +24,7 @@ export const useWeatherData = () => {
     },
   ]);
 
-  const [sortState, setSortState] = useState({
-    [WEATHER_TABLE_COLUMNS_SORTABLE.TEMPERATURE]: 0,
-    [WEATHER_TABLE_COLUMNS_SORTABLE.WIND_SPEED]: 0,
-  });
+  const [sortState, setSortState] = useState({ ...initialSortState });
 
   const [weatherData, setWeatherData] = useState<
     IFiveDaysThreeHoursWeatherForecast[]
@@ -67,6 +69,7 @@ export const useWeatherData = () => {
         setWeatherData((prev) => [...prev, { ...data }]);
       }
       setLoading(false);
+      setSortState({ ...initialSortState });
     },
     [latLng]
   );
